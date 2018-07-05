@@ -3,7 +3,7 @@ require "anemone"
 
 URL = "https://www.amazon.co.jp/gp/top-sellers/"
 
-Anemone.crawl(URL, depth_limit: 1, skip_query_strings: true) do |anemone|
+Anemone.crawl(URL, depth_limit:1, skip_query_strings: true) do |anemone|
 
     anemone.focus_crawl do |page|
   
@@ -12,7 +12,9 @@ Anemone.crawl(URL, depth_limit: 1, skip_query_strings: true) do |anemone|
       } 
     end
 
-    anemone.on_every_page do |page|
+    PATTERN = %r[computers|food-beverage]
+
+    anemone.on_pages_like(PATTERN) do |page|
 
         puts page.url
   
